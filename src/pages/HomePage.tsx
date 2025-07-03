@@ -11,7 +11,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <FileText className="h-8 w-8 text-red-500 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900">Sign PDF</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Sign Your PDF</h1>
             </div>
             <div className="flex space-x-4">
               <Link
@@ -122,7 +122,7 @@ export default function HomePage() {
       <footer className="bg-white border-t border-gray-200 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500">
-            <p>&copy; 2024 Sign PDF. All rights reserved.</p>
+            <p>&copy; 2025 Sign YourPDF. All rights reserved.</p>
           </div>
         </div>
       </footer>
