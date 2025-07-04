@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Upload, FileText, Download, Clock, CheckCircle, LogOut, Plus, Trash2, RotateCcw } from 'lucide-react';
+import { Upload, FileText, Download, Clock, CheckCircle, LogOut, Plus, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { supabase } from '../lib/supabase';
 
@@ -57,12 +57,12 @@ export default function Dashboard() {
     }
 
     setUploading(true);
-    
+
     try {
       // Create a user-specific folder path
       const userId = user?.id;
       const fileName = `${userId}/${Date.now()}_${file.name}`;
-      
+
       // Upload file to Supabase Storage with user-specific path
       const { error: uploadError } = await supabase.storage
         .from('documents')
@@ -92,7 +92,7 @@ export default function Dashboard() {
 
       toast.success('PDF uploaded successfully!');
       fetchDocuments();
-      
+
       // Navigate to signing view
       navigate(`/sign/${document.id}`);
     } catch (error: any) {
@@ -106,7 +106,7 @@ export default function Dashboard() {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setDragActive(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       handleFileUpload(files[0]);
@@ -139,7 +139,7 @@ export default function Dashboard() {
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      
+
       toast.success('Document downloaded successfully!');
     } catch (error) {
       console.error('Error downloading document:', error);
@@ -188,29 +188,7 @@ export default function Dashboard() {
     }
   };
 
-  const resetDocument = async (documentId: string) => {
-    try {
-      // Delete existing signatures
-      await supabase
-        .from('signatures')
-        .delete()
-        .eq('document_id', documentId);
-
-      // Reset document status
-      const { error } = await supabase
-        .from('documents')
-        .update({ status: 'pending' })
-        .eq('id', documentId);
-
-      if (error) throw error;
-
-      toast.success('Document reset for re-signing!');
-      navigate(`/sign/${documentId}`);
-    } catch (error) {
-      console.error('Error resetting document:', error);
-      toast.error('Failed to reset document');
-    }
-  };
+  // The resetDocument function has been removed.
 
   if (loading) {
     return (
@@ -227,8 +205,8 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
-              <FileText className="h-8 w-8 text-red-500 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900">Sign PDF</h1>
+              <FileText className="h-8 w-8 text-indigo-500 mr-3" />
+              <h1 className="text-2xl font-bold text-gray-900">SignBuddy</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-700">Welcome, {user?.user_metadata?.name || user?.email}</span>
@@ -276,9 +254,7 @@ export default function Dashboard() {
             />
             <label
               htmlFor="file-upload"
-              className={`inline-flex items-center px-8 py-4 border border-transparent text-lg font-semibold rounded-lg text-white bg-red-500 hover:bg-red-600 cursor-pointer transition-colors ${
-                uploading ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
+              className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-semibold rounded-lg text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 cursor-pointer transition-colors"
             >
               <Plus className="h-5 w-5 mr-2" />
               {uploading ? 'Uploading...' : 'Select PDF file'}
@@ -289,7 +265,7 @@ export default function Dashboard() {
         {/* Documents List */}
         <div>
           <h2 className="text-2xl font-semibold text-gray-900 mb-8">Your Documents</h2>
-          
+
           {documents.length === 0 ? (
             <div className="text-center py-16">
               <FileText className="h-16 w-16 text-gray-400 mx-auto mb-6" />
@@ -336,34 +312,26 @@ export default function Dashboard() {
                       )}
                     </span>
                   </div>
-                  
+
                   <div className="flex flex-wrap gap-2">
-                    {doc.status === 'pending' ? (
+                    {doc.status === 'pending' && (
                       <Link
                         to={`/sign/${doc.id}`}
-                        className="flex-1 flex items-center justify-center px-3 py-2 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
+                        className="flex-1 flex items-center justify-center px-3 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg text-sm font-medium hover:from-indigo-600 hover:to-purple-600 transition-colors"
                       >
                         Sign
                       </Link>
-                    ) : (
-                      <button
-                        onClick={() => resetDocument(doc.id)}
-                        className="flex items-center px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                      >
-                        <RotateCcw className="h-4 w-4 mr-1" />
-                        Re-sign
-                      </button>
                     )}
                     <button
                       onClick={() => downloadDocument(doc)}
-                      className="flex items-center px-3 py-2 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-colors"
+                      className="flex items-center px-3 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg text-sm font-medium hover:from-indigo-600 hover:to-purple-600 transition-colors"
                     >
                       <Download className="h-4 w-4 mr-1" />
                       Download
                     </button>
                     <button
                       onClick={() => deleteDocument(doc.id)}
-                      className="flex items-center px-3 py-2 border border-red-300 text-red-600 rounded-lg text-sm font-medium hover:bg-red-50 transition-colors"
+                      className="flex items-center px-3 py-2 border border-indigo-300 text-indigo-600 rounded-lg text-sm font-medium hover:bg-indigo-50 transition-colors"
                     >
                       <Trash2 className="h-4 w-4 mr-1" />
                       Delete

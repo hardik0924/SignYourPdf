@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { FileText, Eye, EyeOff, Mail, Lock, User, CheckCircle, RefreshCw, AlertCircle, ArrowRight, KeyRound } from 'lucide-react';
+import { FileText, Eye, EyeOff, Mail, Lock, User, CheckCircle, RefreshCw, AlertCircle, ArrowRight, KeyRound, Home } from 'lucide-react'; // Import Home icon
 import { toast } from 'react-toastify';
 
 export default function AuthPage() {
@@ -10,7 +10,7 @@ export default function AuthPage() {
   const isConfirmed = searchParams.get('confirmed') === 'true';
   const isPasswordReset = searchParams.get('reset') === 'true';
   const emailParam = searchParams.get('email') || '';
-  
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState(emailParam);
   const [password, setPassword] = useState('');
@@ -25,7 +25,7 @@ export default function AuthPage() {
   const [resendingEmail, setResendingEmail] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [sendingReset, setSendingReset] = useState(false);
-  
+
   const { signIn, signUp, resendConfirmation, resetPassword } = useAuth();
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export default function AuthPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (isSignUp && password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
@@ -56,7 +56,7 @@ export default function AuthPage() {
     try {
       if (isSignUp) {
         const result = await signUp(email, password, name);
-        
+
         if (result.userExists) {
           setRegisteredEmail(email);
           setShowUserExists(true);
@@ -90,7 +90,7 @@ export default function AuthPage() {
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!resetEmail.trim()) {
       toast.error('Please enter your email address');
       return;
@@ -120,9 +120,10 @@ export default function AuthPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6">
-              <KeyRound className="h-8 w-8 text-blue-600" />
-            </div>
+            <Link to="/" className="flex justify-center items-center mb-6">
+              <FileText className="h-12 w-12 text-indigo-500" />
+              <span className="text-3xl font-bold text-gray-900 ml-2">SignBuddy</span>
+            </Link>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Reset your password
             </h2>
@@ -158,7 +159,7 @@ export default function AuthPage() {
                 <Mail className="h-5 w-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-blue-700">
-                    We'll send you an email with instructions to reset your password. 
+                    We'll send you an email with instructions to reset your password.
                     The link will be valid for 1 hour.
                   </p>
                 </div>
@@ -191,6 +192,15 @@ export default function AuthPage() {
               >
                 Back to sign in
               </button>
+
+              {/* Home Page Button for Forgot Password Screen */}
+              <Link
+                to="/"
+                className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                Go to Home Page
+              </Link>
             </div>
           </form>
         </div>
@@ -204,9 +214,10 @@ export default function AuthPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-orange-100 mb-6">
-              <AlertCircle className="h-8 w-8 text-orange-600" />
-            </div>
+            <Link to="/" className="flex justify-center items-center mb-6">
+              <FileText className="h-12 w-12 text-indigo-500" />
+              <span className="text-3xl font-bold text-gray-900 ml-2">SignBuddy</span>
+            </Link>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Account already exists
             </h2>
@@ -226,7 +237,7 @@ export default function AuthPage() {
                   What would you like to do?
                 </h3>
                 <p className="text-sm text-orange-700">
-                  If this is your account, please sign in instead. If you forgot your password, 
+                  If this is your account, please sign in instead. If you forgot your password,
                   you can reset it on the sign in page.
                 </p>
               </div>
@@ -248,6 +259,15 @@ export default function AuthPage() {
             >
               Try different email
             </button>
+
+            {/* Home Page Button for User Exists Screen */}
+            <Link
+              to="/"
+              className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+            >
+              <Home className="h-4 w-4 mr-2" />
+              Go to Home Page
+            </Link>
           </div>
 
           <div className="text-center">
@@ -266,9 +286,10 @@ export default function AuthPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
-              <Mail className="h-8 w-8 text-green-600" />
-            </div>
+            <Link to="/" className="flex justify-center items-center mb-6">
+              <FileText className="h-12 w-12 text-indigo-500" />
+              <span className="text-3xl font-bold text-gray-900 ml-2">SignBuddy</span>
+            </Link>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Check your email
             </h2>
@@ -301,7 +322,7 @@ export default function AuthPage() {
             <button
               onClick={handleResendConfirmation}
               disabled={resendingEmail}
-              className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {resendingEmail ? (
                 <>
@@ -322,6 +343,15 @@ export default function AuthPage() {
             >
               Back to sign in
             </Link>
+
+            {/* Home Page Button for Email Confirmation Screen */}
+            <Link
+              to="/"
+              className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+            >
+              <Home className="h-4 w-4 mr-2" />
+              Go to Home Page
+            </Link>
           </div>
 
           <div className="text-center">
@@ -339,14 +369,15 @@ export default function AuthPage() {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <Link to="/" className="flex justify-center items-center mb-6">
-            <FileText className="h-12 w-12 text-red-500" />
+            <FileText className="h-12 w-12 text-indigo-500" />
+            <span className="text-3xl font-bold text-gray-900 ml-2">SignBuddy</span>
           </Link>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
             {isSignUp ? 'Create your account' : 'Welcome back'}
           </h2>
           <p className="text-gray-600">
-            {isSignUp 
-              ? 'Join thousands of users who trust our platform'
+            {isSignUp
+              ? ''
               : 'Sign in to your account to continue'
             }
           </p>
@@ -487,26 +518,11 @@ export default function AuthPage() {
             )}
           </div>
 
-          {isSignUp && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="flex items-start">
-                <Mail className="h-5 w-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-blue-700">
-                    <strong>Smart email validation:</strong> We'll check if your email is already registered. 
-                    If it exists, we'll guide you to sign in instead. After creating a new account, 
-                    you'll receive a confirmation email that must be verified before signing in.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div>
             <button
               type="submit"
               disabled={loading || (isSignUp && (password !== confirmPassword || password.length < 6))}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -516,29 +532,26 @@ export default function AuthPage() {
             </button>
           </div>
 
-          {!isSignUp && (
-            <div className="text-center">
-              <button
-                type="button"
-                onClick={() => setShowForgotPassword(true)}
-                className="text-sm text-red-500 hover:text-red-600 transition-colors"
-              >
-                Forgot your password?
-              </button>
-            </div>
-          )}
-
           <div className="text-center">
             <p className="text-sm text-gray-600">
               {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
               <Link
                 to={isSignUp ? '/auth' : '/auth?mode=signup'}
-                className="font-medium text-red-500 hover:text-red-600 transition-colors"
+                className="font-medium text-indigo-500 hover:text-indigo-600 transition-colors"
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
               </Link>
             </p>
           </div>
+
+          {/* Home Page Button for Main Auth Page */}
+          <Link
+            to="/"
+            className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+          >
+            <Home className="h-4 w-4 mr-2" />
+            Go to Home Page
+          </Link>
         </form>
       </div>
     </div>

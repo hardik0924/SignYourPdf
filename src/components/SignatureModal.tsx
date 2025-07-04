@@ -102,7 +102,7 @@ export default function SignatureModal({ onClose, onConfirm }: SignatureModalPro
           {/* Font Selection */}
           <div>
             <div className="flex items-center mb-4">
-              <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center mr-3">
+              <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center mr-3">
                 <span className="text-white text-sm">✓</span>
               </div>
               <span className="text-sm font-medium text-gray-700">Available PDF Fonts</span>
@@ -115,18 +115,18 @@ export default function SignatureModal({ onClose, onConfirm }: SignatureModalPro
                   onClick={() => setSelectedFont(font.value)}
                   className={`w-full text-left p-4 border rounded-lg transition-colors ${
                     selectedFont === font.value
-                      ? 'border-red-500 bg-red-50'
+                      ? 'border-indigo-500 bg-indigo-50'
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                   }`}
                 >
                   <div className="flex items-center">
                     <div className={`w-4 h-4 rounded-full border-2 mr-3 flex-shrink-0 ${
                       selectedFont === font.value
-                        ? 'border-red-500 bg-red-500'
+                        ? 'border-indigo-500 bg-indigo-500'
                         : 'border-gray-300'
                     }`}>
                       {selectedFont === font.value && (
-                        <div className="w-full h-full rounded-full bg-red-500"></div>
+                        <div className="w-full h-full rounded-full bg-indigo-500"></div>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -154,7 +154,7 @@ export default function SignatureModal({ onClose, onConfirm }: SignatureModalPro
           <button
             onClick={handleConfirm}
             disabled={!name.trim()}
-            className="px-8 py-3 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Apply
           </button>

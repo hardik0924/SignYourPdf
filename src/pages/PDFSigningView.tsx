@@ -122,11 +122,6 @@ export default function PDFSigningView() {
 
   const signatureItems: SignatureItem[] = [
     { id: 'signature', type: 'signature', label: 'Signature', icon: <PenTool className="h-4 w-4" /> },
-    { id: 'initials', type: 'initials', label: 'Initials', icon: <Edit3 className="h-4 w-4" /> },
-    { id: 'name', type: 'name', label: 'Name', icon: <Type className="h-4 w-4" /> },
-    { id: 'date', type: 'date', label: 'Date', icon: <Calendar className="h-4 w-4" /> },
-    { id: 'text', type: 'text', label: 'Text', icon: <Type className="h-4 w-4" /> },
-    { id: 'company', type: 'company', label: 'Company', icon: <Building className="h-4 w-4" /> },
   ];
 
   useEffect(() => {
@@ -637,7 +632,7 @@ export default function PDFSigningView() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
       </div>
     );
   }
@@ -649,7 +644,7 @@ export default function PDFSigningView() {
           <p className="text-gray-500">Document not found</p>
           <button
             onClick={() => navigate('/dashboard')}
-            className="mt-4 text-red-500 hover:text-red-600"
+            className="mt-4 text-indigo-500 hover:text-indigo-600"
           >
             Back to Dashboard
           </button>
@@ -695,7 +690,7 @@ export default function PDFSigningView() {
                 <button
                   onClick={finalizeDocument}
                   disabled={signatureFields.length === 0 || finalizing}
-                  className="flex items-center px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                  className="flex items-center px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                 >
                   <Send className="h-4 w-4 mr-2" />
                   {finalizing ? 'Signing...' : 'Sign'}
@@ -704,7 +699,7 @@ export default function PDFSigningView() {
               {document.status === 'signed' && (
                 <button
                   onClick={downloadDocument}
-                  className="flex items-center px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium"
+                  className="flex items-center px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-colors font-medium"
                 >
                   <Download className="h-4 w-4 mr-2" />
                   Download
@@ -726,7 +721,7 @@ export default function PDFSigningView() {
                 onClick={() => setCurrentPage(page)}
                 className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                   currentPage === page
-                    ? 'bg-red-50 text-red-700 border border-red-200'
+                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -788,7 +783,7 @@ export default function PDFSigningView() {
             <div className="max-w-4xl mx-auto">
               {pdfLoading ? (
                 <div className="flex items-center justify-center h-96">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
                 </div>
               ) : !pdfBlob ? (
                 <div className="flex items-center justify-center h-96">
@@ -808,7 +803,7 @@ export default function PDFSigningView() {
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                   loading={
                     <div className="flex items-center justify-center h-96">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
                     </div>
                   }
                 >
@@ -931,7 +926,7 @@ export default function PDFSigningView() {
                                     e.stopPropagation();
                                     removeField(field.id);
                                   }}
-                                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs hover:bg-red-600 transition-colors z-10"
+                                  className="absolute -top-2 -right-2 w-6 h-6 bg-indigo-500 text-white rounded-full text-xs hover:bg-indigo-600 transition-colors z-10"
                                 >
                                   ×
                                 </button>
@@ -1009,12 +1004,12 @@ export default function PDFSigningView() {
                 <p className="text-sm text-blue-700">
                   <strong>Absolute Precision:</strong> Click exactly where you want to place fields.
                 </p>
-                <p className="text-xs text-blue-600 mt-1">
+                {/* <p className="text-xs text-blue-600 mt-1">
                   <strong>Dynamic Font Sizing:</strong> Resize fields to change font size automatically.
                 </p>
                 <p className="text-xs text-blue-600 mt-1">
                   <strong>Single-line display:</strong> All signatures appear on one line for consistency.
-                </p>
+                </p> */}
               </div>
             </div>
           )}
@@ -1073,7 +1068,7 @@ export default function PDFSigningView() {
                           e.stopPropagation();
                           removeField(field.id);
                         }}
-                        className="text-red-500 hover:text-red-700 transition-colors"
+                        className="text-indigo-500 hover:text-indigo-700 transition-colors"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>

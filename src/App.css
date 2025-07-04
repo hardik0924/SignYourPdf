@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Satisfy&family=Dancing+Script:wght@400;700&family=Kalam:wght@400;700&family=Caveat:wght@400;700&display=swap');
 
+body {
+  background: linear-gradient(135deg, #6366f1 0%, #a21caf 100%);
+  min-height: 100vh;
+}
+
 .pdf-viewer-container {
   height: calc(100vh - 64px);
 }
@@ -14,15 +19,15 @@
 
 .draggable-signature {
   cursor: move;
-  border: 2px dashed #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  border: 2px dashed #6366f1; /* indigo */
+  background: rgba(99, 102, 241, 0.1);
   position: absolute;
   z-index: 10;
 }
 
 .draggable-signature:hover {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.15);
+  border-color: #4f46e5; /* indigo dark */
+  background: rgba(79, 70, 229, 0.15);
 }
 
 /* Custom scrollbar */
@@ -45,29 +50,33 @@
 
 /* iLovePDF-style red theme */
 .btn-primary {
-  background-color: #ef4444;
-  border-color: #ef4444;
+  background-color: #6366f1;
+  border-color: #6366f1;
 }
 
 .btn-primary:hover {
-  background-color: #dc2626;
-  border-color: #dc2626;
+  background-color: #4f46e5;
+  border-color: #4f46e5;
 }
 
 .text-primary {
-  color: #ef4444;
+  color: #6366f1 !important;
 }
 
 .border-primary {
-  border-color: #ef4444;
+  border-color: #6366f1;
 }
 
 .bg-primary {
-  background-color: #ef4444;
+  background-color: #6366f1 !important;
 }
 
 .bg-primary-light {
-  background-color: #fef2f2;
+  background-color: #eef2ff; /* indigo-50 */
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
 }
 
 /* PDF page styling */
@@ -84,8 +93,8 @@
 /* Signature field styling */
 .signature-field {
   position: absolute;
-  border: 2px solid #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid #6366f1;
+  background: rgba(99, 102, 241, 0.1);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -96,14 +105,11 @@
   z-index: 10;
 }
 
-.signature-field:hover {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.15);
-}
-
+.signature-field:hover,
 .signature-field.selected {
-  border-color: #dc2626;
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+  border-color: #4f46e5;
+  background: rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
 
 /* Toolbar styling */
@@ -112,7 +118,7 @@
 }
 
 .toolbar-button.active {
-  @apply bg-red-50 border-red-200 text-red-600;
+  @apply bg-indigo-50 border-indigo-200 text-indigo-600;
 }
 
 /* Modal styling */
@@ -127,21 +133,15 @@
   transition: all 0.3s ease;
 }
 
-.upload-area:hover {
-  border-color: #ef4444;
-  background-color: #fef2f2;
-}
-
+.upload-area:hover,
 .upload-area.drag-active {
-  border-color: #ef4444;
-  background-color: #fef2f2;
-  transform: scale(1.02);
+  border-color: #6366f1;
+  background-color: #eef2ff;
 }
 
-/* Drag and drop styling */
 .drag-over {
-  background-color: rgba(239, 68, 68, 0.1);
-  border: 2px dashed #ef4444;
+  background-color: rgba(99, 102, 241, 0.1);
+  border: 2px dashed #6366f1;
 }
 
 /* Draggable item styling */
