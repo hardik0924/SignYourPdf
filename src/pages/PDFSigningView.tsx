@@ -1002,14 +1002,14 @@ export default function PDFSigningView() {
               
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <p className="text-sm text-blue-700">
-                  <strong>Absolute Precision:</strong> Click exactly where you want to place fields.
+                  <strong>Step 1:</strong> Click above Signuture button. 
                 </p>
-                {/* <p className="text-xs text-blue-600 mt-1">
-                  <strong>Dynamic Font Sizing:</strong> Resize fields to change font size automatically.
+                <p className="text-sm text-blue-700 mt-1">
+                  <strong>Step 2:</strong> Click exactly where you want to place Signture& then drag your signutre where you want to place it. 
                 </p>
-                <p className="text-xs text-blue-600 mt-1">
-                  <strong>Single-line display:</strong> All signatures appear on one line for consistency.
-                </p> */}
+                <p className="text-sm text-blue-700 mt-1">
+                  <strong>Step 3:</strong> Resize Signture to change font size automatically.
+                </p>
               </div>
             </div>
           )}
