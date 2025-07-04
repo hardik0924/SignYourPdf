@@ -27,7 +27,7 @@ A modern, responsive web app to securely sign PDF documents online. Inspired by 
 
 1️⃣ Clone the repo:
 ```bash
-git clone https://github.com/yourusername/signbuddy.git
+git clone https://github.com/hardik0924/SignBuddy
 cd frontend
 ```
 
